@@ -2,6 +2,7 @@ package application;
 
 import java.util.Scanner;
 
+import model.apps.InternetBrowser;
 import model.apps.MusicPlayer;
 import model.apps.Phone;
 
@@ -22,7 +23,7 @@ public class Main {
 
 //    	Starting with MusicPlayer, test asked blocks
         MusicPlayer ipod = new MusicPlayer();
-//
+
         ipod.addMusic("Be it - Michael Jackson");
         ipod.addMusic("Unnamed feeling - Mettallica");
         ipod.addMusic("Always on My Mind - Elvis");
@@ -37,25 +38,37 @@ public class Main {
         ipod.close();
     	
 //      Testing phone
-//    	Phone phone = new Phone();
-//        
-//    	phone.addContact("Ana", 123);
-//    	phone.addContact("Paula", 321);
-//    	phone.addContact("Beatrice", 567);
-//    	
-//    	phone.showContacts();
-//    	
-//    	phone.removeContact("Ana");
-//    	phone.removeContact("Joao");
-//    	
-//    	phone.researchContactByName("Paula");        
-//    	phone.researchContactByName("Maria");
-//    	
-//    	phone.phoneCall("Paula");
-//    	phone.phoneAnswer("Paula", input);	
-//    	phone.phoneAnswer("Beatrice", input);
-//    	phone.close();
+    	Phone phone = new Phone();
+        
+    	phone.addContact("Ana", 123);
+    	phone.addContact("Paula", 321);
+    	phone.addContact("Beatrice", 567);
     	
+    	phone.showContacts();
+    	
+    	phone.removeContact("Ana");
+    	phone.removeContact("Joao");
+    	
+    	phone.researchContactByName("Paula");        
+    	phone.researchContactByName("Maria");
+    	
+    	phone.phoneCall("Paula");
+    	phone.phoneAnswer("Paula", input);	
+    	phone.phoneAnswer("Beatrice", input);
+    	phone.close();
+        
+//    	Testing InternetBrowser
+        InternetBrowser safari = new InternetBrowser();
+        
+        safari.addNewTab("Google", "www.google.com", "Sed ut perspiciatis unde omnis iste natus error "
+        		+ "\nsit voluptatem accusantium doloremque laudantium, "
+        		+ "\ntotam rem aperiam, eaque ipsa quae ab illo inventore veritatis "
+        		+ "\net quasi architecto beatae vitae dicta sunt explicabo. ");
+    	
+        safari.displayPage("Google");
+    	
+    	safari.refreshPage("Google");
+        
     	input.close();
     }
 }
