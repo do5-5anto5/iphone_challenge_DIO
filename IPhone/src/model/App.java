@@ -1,6 +1,6 @@
 package model;
 
-public interface App {
+public interface App<T> {
     
     public void start();
     public void close();
@@ -13,4 +13,6 @@ public interface App {
     		e.printStackTrace();
     	}
     }
+    
+    public boolean isMapped (T obj);
 }

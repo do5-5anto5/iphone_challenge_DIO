@@ -7,7 +7,7 @@ import java.util.Scanner;
 import model.App;
 import model.entities.Contact;
 
-public class Phone implements App {
+public class Phone implements App<Contact> {
 
 	private Map<String, Contact> contactsBook = new HashMap<>();
 
@@ -23,8 +23,11 @@ public class Phone implements App {
 	}
 
 	public void removeContact(String name) {
+		System.out.println("Removing " + name);
+		simulateTimeCharge();
+		
 		if (!contactsBook.isEmpty()) {
-			if (isAble(name)) {
+			if (isMapped(contactsBook.get(name))) {
 				contactsBook.remove(name);
 				System.out.println(name + " removed from book.\n");
 			simulateTimeCharge();
@@ -40,8 +43,10 @@ public class Phone implements App {
 	}
 
 	public void researchContactByName(String name) {
+		System.out.println("Searching for " + name);
+		simulateTimeCharge();
 		if (!contactsBook.isEmpty()) {
-			if (isAble(name)) {
+			if (isMapped(contactsBook.get(name))) {
 			System.out.println(name + ", " + contactsBook.get(name) + "\n");
 			simulateTimeCharge();
 			}
@@ -59,18 +64,20 @@ public class Phone implements App {
 		if (!contactsBook.isEmpty()) {
 			System.out.println("\nAll contacts:\n");
 			for (String key : contactsBook.keySet()) {
-				System.out.println(key + ", " + contactsBook.get(key) + "\n");
+				System.out.println(key + ", " + contactsBook.get(key) );
 				simulateTimeCharge();
 			}
  		} else {
 			System.out.println("Empty List.\n");
 			simulateTimeCharge();
 		}
+		System.out.println();
+		simulateTimeCharge();
 	}
 
 	public void phoneCall(String name) {
 		if(!contactsBook.isEmpty()) {
-		if (isAble(name)) {
+			if (isMapped(contactsBook.get(name))) {
 			for (String key : contactsBook.keySet()) {
 				if (key == name) {
 					System.out.println("Calling " + name + " - " + contactsBook.get(name) + "\n");
@@ -90,34 +97,30 @@ public class Phone implements App {
 		}
 	}
 
-	public void phoneAnswer(String name) {
-		
-		try (Scanner input = new Scanner(System.in)){
-			System.out.println(contactsBook.get(name)
-					+ " is calling you. Answer?");
-			String answer = input.next();
-			if (answer.toUpperCase() == "YES" || answer.toUpperCase() == "Y") {
-				System.out.println("You did, enjoy.");
-				simulateTimeCharge();
-			}
-			else {
-				startVoiceMail(name);
-				simulateTimeCharge();
-			}
+	public void phoneAnswer(String name, Scanner input) {
+		    try {
+		        System.out.println(contactsBook.get(name)
+		                + " is calling you. Answer?");
+		        String answer = input.next();		        
+		        if (answer.toUpperCase().equals("YES") || answer.toUpperCase().equals("Y")) {
+		            System.out.println("You did, enjoy.");
+		            simulateTimeCharge();
+		        }
+		        else {
+		            startVoiceMail(name);
+		            simulateTimeCharge();
+		        }
+		    }
+		    catch (RuntimeException e) {
+		        e.printStackTrace();
+		    }
 		}
-		catch (RuntimeException e) {
-			e.printStackTrace();
-		}
-	}
 
 	private void startVoiceMail(String name) {
 		System.out.println(contactsBook.get(name) + " is leaving a voice mail to you.");
 		simulateTimeCharge();
 	}
 
-	private boolean isAble(String name) {
-		return contactsBook.containsKey(name);
-	}
 	
 
 	@Override
@@ -129,4 +132,10 @@ public class Phone implements App {
 	public void close() {
 		System.out.println("Closing Phone.\n");
 	}
+	
+	@Override
+	public boolean isMapped(Contact obj) {
+		return contactsBook.containsValue(obj);
+	}
+	
 }

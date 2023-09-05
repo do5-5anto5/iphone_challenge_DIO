@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Scanner;
+
 import model.apps.MusicPlayer;
 import model.apps.Phone;
 
@@ -15,10 +17,12 @@ import model.apps.Phone;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
+    	
+    	Scanner input = new Scanner(System.in);
 
 //    	Starting with MusicPlayer, test asked blocks
         MusicPlayer ipod = new MusicPlayer();
-
+//
         ipod.addMusic("Be it - Michael Jackson");
         ipod.addMusic("Unnamed feeling - Mettallica");
         ipod.addMusic("Always on My Mind - Elvis");
@@ -29,24 +33,29 @@ public class Main {
         ipod.selectMusicByPosition(1);
         ipod.pauseMusic(1);
         ipod.removeMusicByPosition(3);
+        ipod.removeMusicByPosition(7);
         ipod.close();
     	
 //      Testing phone
-    	Phone phone = new Phone();
-        
-    	phone.addContact("Ana", 123);
-    	phone.addContact("Paula", 321);
+//    	Phone phone = new Phone();
+//        
+//    	phone.addContact("Ana", 123);
+//    	phone.addContact("Paula", 321);
+//    	phone.addContact("Beatrice", 567);
+//    	
+//    	phone.showContacts();
+//    	
+//    	phone.removeContact("Ana");
+//    	phone.removeContact("Joao");
+//    	
+//    	phone.researchContactByName("Paula");        
+//    	phone.researchContactByName("Maria");
+//    	
+//    	phone.phoneCall("Paula");
+//    	phone.phoneAnswer("Paula", input);	
+//    	phone.phoneAnswer("Beatrice", input);
+//    	phone.close();
     	
-    	phone.showContacts();
-    	
-    	phone.removeContact("Ana");
-    	phone.removeContact("Joao");
-    	
-    	phone.researchContactByName("Paula");        
-    	phone.researchContactByName("Maria");
-    	
-    	phone.phoneCall("Paula");
-    	phone.phoneAnswer("Paula");	
-    	phone.close();
+    	input.close();
     }
 }
